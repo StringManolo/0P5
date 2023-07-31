@@ -1,0 +1,15 @@
+- Npm
+- HTML5
+- Typescript
+- Vue
+  - vue-router
+  - vue-loader
+  - vue-template-compiler
+- WebPack
+  - webpack-cli
+  - webpack-dev-server
+- Axios
+- Sass
+- ESLint
+  - xo-typescript
+- Jest

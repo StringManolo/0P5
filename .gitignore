@@ -1,0 +1,56 @@
+# Node.js / NPM
+node_modules/
+npm-debug.log
+
+# Build output
+/dist/
+/build/
+
+# Compiled TypeScript files
+*.js
+*.js.map
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Cache and temporary files
+.cache/
+.tmp/
+.temp/
+
+# Sass cache
+.sass-cache/
+
+# Jest coverage reports
+coverage/
+
+# Editor specific files
+ .vscode/
+ .idea/
+
+# Vim backup files
+*~
+*swp
+*.swpx
+*.swo
+
+# Vim undo files
+*.un~
+
+# Vim temp files
+*.tmp
+
+# Vim swap files
+*.swp
+
+# Vim session files
+Session.vim
+
+# Vim view files
+*.vim.view
+
+
