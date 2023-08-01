@@ -1,7 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/Search';
 
+const App: React.FC = () => {
+  const handleSearch = (query: string) => {
+    alert(`Searching for ${query}`);
+  }
+
+  return (
+    <div>
+      <Search onSearch={handleSearch}/>
+    </div>
+  )
+}
+
+export default App;
+
+/*
 function App() {
   return (
     <div className="App">
@@ -24,3 +39,4 @@ function App() {
 }
 
 export default App;
+*/
