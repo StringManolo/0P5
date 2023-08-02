@@ -7,19 +7,40 @@
 }
 
 .search-container input {
-  width: 70%;
+  width: 75%;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   border: 1px solid #ccc;
-  padding-left: 10px;
+  border-right: none;
   font-size: 1.5em;
 }
 
 .search-container button {
   height: 50px;
-  padding: 0 10px;
-  border-radius: 5px;
+  width: 25%;
+  border-radius: 0 5px 5px 0;
   border: none;
   cursor: pointer;
   font-size: 1.5em;
 }
+
+
+/* Make elements share same "outline" emulating outline with box-shadow */
+.search-fakeoutline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 70%;
+}
+
+.search-fakeoutline:focus-within {
+  box-shadow: 0 0 2px 2px #1EC7FF;
+}
+
+.search-container input:focus,
+.search-container button:focus {
+  outline: none;
+  border: none;
+}
+

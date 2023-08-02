@@ -19,8 +19,10 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   return (
     <div className="search-container">
-      <input type="text" value={query} onChange={handleChange} />
-      <button onClick={handleSearch}>Search</button>
+      <div className="search-fakeoutline">
+        <input type="text" value={query} onChange={handleChange} />
+        <button onClick={handleSearch}>Search</button>
+      </div>
     </div>
   )
 }

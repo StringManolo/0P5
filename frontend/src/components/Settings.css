@@ -17,24 +17,32 @@
 }
 
 .settings-menu {
-  display: none;
-  position: absolute;
-  right: -400px;
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  transform: translateX(400px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  position: fixed;
+  right: 0;
   top: 0;
   width: 400px;
   height: 100%;
   background-color: #efefef;
-  transition: right 0.3s ease;
 
-  /* Settings-Icon Size + Settings-Icon Position + A bit of extra Margin */
-  padding-top: calc(3rem + 8px + 5px); 
   padding-left: 35px;
+  padding-top: 1rem;
 }
 
 .settings-menu.open {
-  display: flex;
-  flex-direction: column;
-  right: 0;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.settings-menu.close {
+  opacity: 0;
+  transform: translateX(400px);
 }
 
 .settings-menu > div {
@@ -45,9 +53,14 @@
   margin-top: 7px;
 }
 
+.settings-menu-title {
+  font-size: 2rem;
+  padding-bottom: 1.5rem;
+}
+
 .settings-menu > div > span {
-  width: 280px;
-  max-width: 280px;
+  width: 348px;
+  max-width: 348px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
