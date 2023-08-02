@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "cd frontend && npm run build",
     "deploy": "gh-pages -d ./frontend/build"
   },
   "repository": {
@@ -16,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/stringmanolo/0P5/issues"
   },
-  "homepage": "https://stringmanolo.github.io/0P5/frontend/build",
+  "homepage": "https://stringmanolo.github.io/0P5/frontend",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }
