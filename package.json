@@ -4,7 +4,8 @@
   "description": "Opensource Privacy Search is an open source search engine.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d ./frontend/build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/stringmanolo/0P5/issues"
   },
-  "homepage": "https://stringmanolo.github.io/0P5/frontend"
+  "homepage": "https://stringmanolo.github.io/0P5/frontend",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
