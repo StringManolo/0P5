@@ -4,3 +4,6 @@
 
 
 Opensource Private Search is an open source search engine.
+
+Only frontend at the moment.
+[Live](https://stringmanolo.github.io/0P5/)
