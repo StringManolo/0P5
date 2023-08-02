@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/stringmanolo/0P5/issues"
   },
-  "homepage": "https://stringmanolo.github.io/0P5/frontend",
+  "homepage": "https://stringmanolo.github.io/0P5/frontend/buid",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }
