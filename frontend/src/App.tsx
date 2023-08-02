@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import Search from './components/Search';
+import Settings from './components/Settings';
+import Title from './components/Title';
 
 const App: React.FC = () => {
   const handleSearch = (query: string) => {
@@ -9,6 +11,8 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <Title />
+      <Settings /> 
       <Search onSearch={handleSearch}/>
     </div>
   )
