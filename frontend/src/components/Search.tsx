@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Search.css';
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -17,7 +18,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   }
 
   return (
-    <div>
+    <div className="search-container">
       <input type="text" value={query} onChange={handleChange} />
       <button onClick={handleSearch}>Search</button>
     </div>
