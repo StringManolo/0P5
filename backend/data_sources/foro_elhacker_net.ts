@@ -90,9 +90,8 @@ async function foro_elhacker_net(query: string) {
       results.push(obj);
     }
 
-    console.log(JSON.stringify(results, null, 2));
-
     await browser.close();
+    return results;
   } catch (error) {
     console.log(error);
   }

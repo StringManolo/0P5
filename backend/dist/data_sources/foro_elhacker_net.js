@@ -75,8 +75,8 @@ function foro_elhacker_net(query) {
                 }
                 results.push(obj);
             }
-            console.log(JSON.stringify(results, null, 2));
             yield browser.close();
+            return results;
         }
         catch (error) {
             console.log(error);
