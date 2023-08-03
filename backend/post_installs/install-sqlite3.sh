@@ -9,8 +9,8 @@ function has_sudo() {
 }
 
 if has_sudo; then
-  sudo apt install -y chromium-browser
+  sudo apt install -y sqlite3
 else
   # Termux proot-distro
-  apt install -y chromium
+  apt install -y sqlite3
 fi

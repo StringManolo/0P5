@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bash ./post_installs/*.sh",
+    "postinstall": "for script in ./post_installs/*.sh; do chmod +x $script; bash $script; done",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^21.0.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "typescript": "^5.1.6"
