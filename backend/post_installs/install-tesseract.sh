@@ -9,8 +9,10 @@ function has_sudo() {
 }
 
 if has_sudo; then
-  sudo apt install -y chromium
+  sudo apt install -y tesseract-ocr;
+  sudo apt install -y tesseract-ocr-spa;
 else
   # Termux proot-distro
-  apt install -y chromium
+  apt install -y tesseract-ocr;
+  apt install -y tesseract-ocr-spa;
 fi
