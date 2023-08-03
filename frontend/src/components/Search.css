@@ -12,6 +12,7 @@
   border-radius: 5px 0 0 5px;
   border: 1px solid #ccc;
   border-right: none;
+  padding-left: 10px;
   font-size: 1.5em;
 }
 
@@ -19,11 +20,17 @@
   height: 50px;
   width: 25%;
   border-radius: 0 5px 5px 0;
-  border: none;
+  /* border: none; */
+  border: 1px solid #ccc;
+  border-left: none;
   cursor: pointer;
   font-size: 1.5em;
 }
 
+.search-container input,
+.search-container button {
+  box-sizing: border-box;
+}
 
 /* Make elements share same "outline" emulating outline with box-shadow */
 .search-fakeoutline {
