@@ -37,18 +37,22 @@ function foro_elhacker_net(query) {
             });
             const page = yield browser.newPage();
             yield page.goto('https://foro.elhacker.net/search.html');
+            console.log(1);
             const searchInput = yield page.$('[name="search"]');
             if (!searchInput) {
                 console.log('Search input element not found.');
                 yield browser.close();
                 return;
             }
+            console.log(2);
             yield searchInput.type(query);
             yield page.click('[name="submit"]');
             yield page.waitForNavigation();
+            console.log(3);
             let [textContent, htmlContent] = yield page.evaluate(() => {
                 return [document.body.innerText, document.body.innerHTML];
             });
+            console.log(4);
             const urls = getUrlsAndInnerText(htmlContent);
             textContent = textContent.split('Fecha en que se publicó')[1];
             textContent = textContent.split('Páginas:')[0];
@@ -56,7 +60,7 @@ function foro_elhacker_net(query) {
             textContent = 'dummy\t\t' + textContent;
             const results = [];
             const resultsLines = textContent.split('%\t');
-            let obj = { title: '', author: '', date: '', description: '' };
+            let obj = { title: '', author: '', date: '', description: '', url: '' };
             let aux = '';
             for (let i = 1; i < resultsLines.length; i++) {
                 let titleAndDescription = resultsLines[i - 1];
@@ -66,6 +70,7 @@ function foro_elhacker_net(query) {
                     author: authorAndDate.split('\t')[0],
                     date: removeLastLineBreak(authorAndDate.split('\t')[1]),
                     description: '',
+                    url: '',
                 };
                 aux = titleAndDescription.split(obj.title)[2];
                 obj.description = (aux.split('\n...').slice(1).join('\n...') || aux).trim().replace((/\n\t.*$/gm), '').trim();
@@ -73,8 +78,12 @@ function foro_elhacker_net(query) {
                 if (match) {
                     obj.url = match.url;
                 }
+                else {
+                    obj.url = '';
+                }
                 results.push(obj);
             }
+            console.log(5);
             yield browser.close();
             return results;
         }

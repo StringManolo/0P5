@@ -27,6 +27,8 @@ async function foro_elhacker_net(query: string) {
     const page = await browser.newPage();
     await page.goto('https://foro.elhacker.net/search.html');
 
+console.log(1);
+
     const searchInput = await page.$('[name="search"]');
     if (!searchInput) {
       console.log('Search input element not found.');
@@ -34,13 +36,19 @@ async function foro_elhacker_net(query: string) {
       return;
     }
 
+console.log(2);
+
     await searchInput.type(query);
     await page.click('[name="submit"]');
     await page.waitForNavigation();
 
+console.log(3);
+
     let [textContent, htmlContent] = await page.evaluate(() => {
       return [document.body.innerText, document.body.innerHTML];
     });
+
+console.log(4);
 
     const urls = getUrlsAndInnerText(htmlContent);
 
@@ -53,7 +61,7 @@ async function foro_elhacker_net(query: string) {
       author: string;
       date: string;
       description: string;
-      url?: string;
+      url: string;
     }[] = [];
 
     const resultsLines = textContent.split('%\t');
@@ -63,8 +71,8 @@ async function foro_elhacker_net(query: string) {
       author: string;
       date: string;
       description: string;
-      url?: string;
-    } = { title: '', author: '', date: '', description: '' };
+      url: string;
+    } = { title: '', author: '', date: '', description: '', url: '' };
 
     let aux = '';
     for (let i = 1; i < resultsLines.length; i++) {
@@ -75,6 +83,7 @@ async function foro_elhacker_net(query: string) {
         author: authorAndDate.split('\t')[0],
         date: removeLastLineBreak(authorAndDate.split('\t')[1]),
         description: '',
+        url: '',
       };
 
       aux = titleAndDescription.split(obj.title)[2];
@@ -86,9 +95,13 @@ async function foro_elhacker_net(query: string) {
       const match = urls.find((item) => obj.title === item.innerText);
       if (match) {
         obj.url = match.url;
+      } else {
+        obj.url = '';
       }
       results.push(obj);
     }
+
+console.log(5);
 
     await browser.close();
     return results;
