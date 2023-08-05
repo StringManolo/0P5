@@ -1,7 +1,10 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
 const port = 8443;
+
+app.use(cors());
 
 import {
   APIDocumentation,

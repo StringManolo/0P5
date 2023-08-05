@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import './Settings.css';
 
-interface CheckboxState {
-  checkbox1: boolean;
-  checkbox2: boolean;
+export interface CheckboxState {
+  wikipedia: boolean;
+  ehn: boolean;
   checkbox3: boolean;
   checkbox4: boolean;
   checkbox5: boolean;
 }
 
-const SettingsMenu: React.FC = () => {
+interface SettingsProps {
+  onSettingsChange: (settings: CheckboxState) => void;
+}
+
+const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({
-    checkbox1: false,
-    checkbox2: false,
+    wikipedia: true,
+    ehn: true,
     checkbox3: false,
     checkbox4: false,
     checkbox5: false,
@@ -31,12 +35,14 @@ const SettingsMenu: React.FC = () => {
       return;
     }
 
-    setCheckboxes({
+    const updateCheckboxes = {
       ...checkboxes,
       [checkboxKey]: !checkboxes[checkboxKey],
-    });
-  };
+    }
 
+    setCheckboxes(updateCheckboxes);
+    onSettingsChange(updateCheckboxes);
+  };
 
   return (
     <>
@@ -46,21 +52,21 @@ const SettingsMenu: React.FC = () => {
           <div className="settings-menu-title">Settings</div>
           {/* Thus wrapper allows me to set font-size inside a flex container. */}
         </div>
-        <div onClick={toggleCheckbox} data-checkbox="checkbox1">
+        <div onClick={toggleCheckbox} data-checkbox="wikipedia">
           <span
             // data-tooltip-id="longnames-tooltip"
             // data-tooltip-content="Opcion 1"
             // data-tooltip-place="bottom" 
-          >Opcion 1</span>
-          <input type="checkbox" checked={checkboxes.checkbox1} />
+          >wikipedia.org</span>
+          <input type="checkbox" checked={checkboxes.wikipedia} />
         </div>
-        <div onClick={toggleCheckbox} data-checkbox="checkbox2">
+        <div onClick={toggleCheckbox} data-checkbox="ehn">
           <span
             // data-tooltip-id="longnames-tooltip"
             // data-tooltip-content="Opcion 2"
             // data-tooltip-place="bottom" 
-          >Opcion 2</span>
-          <input type="checkbox" checked={checkboxes.checkbox2} />
+          >foro.elhacker.net</span>
+          <input type="checkbox" checked={checkboxes.ehn} />
         </div>
         <div onClick={toggleCheckbox} data-checkbox="checkbox3">
           <span
