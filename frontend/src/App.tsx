@@ -4,6 +4,9 @@ import './App.css';
 import Search from './components/Search';
 import Settings, { CheckboxState } from './components/Settings';
 import Title from './components/Title';
+import SearchResults from './components/SearchResults';
+import { BackendResult } from './types/types';
+
 
 const App: React.FC = () => {
   const ENDPOINT_URL = "http://localhost:8443";
@@ -14,6 +17,8 @@ const App: React.FC = () => {
     checkbox4: false,
     checkbox5: false
   });
+  const [searchResults, setSearchResults] = React.useState<BackendResult[]>([]);
+
 
   const handleSearch = async (query: string) => {
     const options = Object.entries(settings)
@@ -23,8 +28,9 @@ const App: React.FC = () => {
 
     try {
       alert(`${ENDPOINT_URL}/search?q=${query}&${options}`);
-      const response = await axios.get(`${ENDPOINT_URL}/search?q=${query}&${options}`);
-      alert(`Respuesta:\n${JSON.stringify(response.data, null, 2)}`);
+      const response = await axios.get<BackendResult[]>(`${ENDPOINT_URL}/search?q=${query}&${options}`);
+      setSearchResults(response.data);
+      // alert(`Respuesta:\n${JSON.stringify(response.data, null, 2)}`);
       // Pasar la data a nuevo componente / añadir router?
     } catch (error) {
       alert(error);
@@ -43,6 +49,7 @@ const App: React.FC = () => {
       <Title />
       <Settings onSettingsChange={handleSettingsChange} /> 
       <Search onSearch={handleSearch} />
+      <SearchResults results={searchResults} />
     </div>
   )
 }
