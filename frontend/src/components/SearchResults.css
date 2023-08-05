@@ -1,0 +1,87 @@
+.search-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  text-size-adjust: none; /* Avoid Android making texts too big or small */
+    /* background-color: green;  */
+  margin-top: 2rem;
+}
+
+.group {
+  width: 90vw;
+  margin-bottom: 1rem;
+    /* background-color: red; */
+}
+
+.result-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.result-list > li {
+  width: 100%;
+  border: 1px solid #1EC7FF;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: #fafafa;
+  margin-bottom: 2rem;
+}
+
+.domain {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.link {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: blue;
+  font-weight: 700;
+}
+
+.description {
+  padding: 0.2rem;
+  padding-bottom: 0.7rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+.author {
+  padding: 0;
+  padding-left: 0.5rem; 
+  padding-right: 0.5rem;
+  margin: 0;
+}
+
+.date {
+  padding: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: 0;
+}
+
+/*
+<div className="search-results">
+       {Object.entries(groupedResults).map(([domain, resultGroup], groupIndex) => (
+         <div className="group" key={groupIndex}>
+           {resultGroup.length > 0 && (
+             <>
+               <h2 className="domain">{domain}</h2>
+               <ul>
+                 {resultGroup.map((result, index) => (
+                   <li key={index}>
+                     <a className="link" href={result.url}>{result.title}</a>
+                     <p className="description">{result.description}</p>
+                     <p className="author">Author: {result.author}</p>
+                     <p className="date">Date: {result.date}</p>
+*/

@@ -37,9 +37,10 @@ console.log(1);
     }
 
 console.log(2);
-
     await searchInput.type(query);
+console.log(2.1);
     await page.click('[name="submit"]');
+console.log(2.2);
     await page.waitForNavigation();
 
 console.log(3);
@@ -91,6 +92,10 @@ console.log(4);
         (/\n\t.*$/gm),
         '',
       ).trim();
+
+      if (obj.description.length > 300) {
+         obj.description = `${obj.description.substring(0, 300)}...`;
+      }
 
       const match = urls.find((item) => obj.title === item.innerText);
       if (match) {

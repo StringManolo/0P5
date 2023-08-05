@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const wikipedia_1 = __importDefault(require("../data_sources/wikipedia"));
 const foro_elhacker_net_1 = __importDefault(require("../data_sources/foro_elhacker_net"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    const searchTerm = 'xss';
+    const searchTerm = 'ddos';
     try {
         const wikipediaResult = yield (0, wikipedia_1.default)(searchTerm);
         console.log(wikipediaResult);

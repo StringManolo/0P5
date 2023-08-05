@@ -46,7 +46,9 @@ function foro_elhacker_net(query) {
             }
             console.log(2);
             yield searchInput.type(query);
+            console.log(2.1);
             yield page.click('[name="submit"]');
+            console.log(2.2);
             yield page.waitForNavigation();
             console.log(3);
             let [textContent, htmlContent] = yield page.evaluate(() => {
@@ -74,6 +76,9 @@ function foro_elhacker_net(query) {
                 };
                 aux = titleAndDescription.split(obj.title)[2];
                 obj.description = (aux.split('\n...').slice(1).join('\n...') || aux).trim().replace((/\n\t.*$/gm), '').trim();
+                if (obj.description.length > 300) {
+                    obj.description = `${obj.description.substring(0, 300)}...`;
+                }
                 const match = urls.find((item) => obj.title === item.innerText);
                 if (match) {
                     obj.url = match.url;

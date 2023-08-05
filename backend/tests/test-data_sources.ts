@@ -2,7 +2,7 @@ import scrapeWikipedia from '../data_sources/wikipedia';
 import foro_elhacker_net from '../data_sources/foro_elhacker_net';
 
 (async () => {
-  const searchTerm = 'xss';
+  const searchTerm = 'ddos';
   try {
     const wikipediaResult = await scrapeWikipedia(searchTerm);
     console.log(wikipediaResult);

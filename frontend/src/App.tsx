@@ -27,7 +27,7 @@ const App: React.FC = () => {
     .join('&');
 
     try {
-      alert(`${ENDPOINT_URL}/search?q=${query}&${options}`);
+      // alert(`${ENDPOINT_URL}/search?q=${query}&${options}`);
       const response = await axios.get<BackendResult[]>(`${ENDPOINT_URL}/search?q=${query}&${options}`);
       setSearchResults(response.data);
       // alert(`Respuesta:\n${JSON.stringify(response.data, null, 2)}`);
