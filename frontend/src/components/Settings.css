@@ -10,7 +10,7 @@
   align-items: center;
   cursor: pointer;
   
-  position: absolute;
+  position: fixed;
   top: 16px;
   right: 16px;
   z-index: 1;
@@ -65,3 +65,50 @@
   text-overflow: ellipsis;
 }
 
+
+
+.settings-menu-endpoint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 90%;
+  
+  position: relative;
+  left: 50%; /* Mueve el elemento a la mitad del contenedor */
+  transform: translateX(-50%); /* Mueve el elemento hacia la izquierda */
+}
+
+.settings-menu-endpoint > input {
+  width: 60%;
+  height: 30px;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+  border-right: none;
+  padding-left: 10px;
+}
+
+.settings-menu-endpoint > button {
+  width: 40%;
+  height: 30px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #ccc;
+  border-left: none;
+  cursor: pointer;
+
+}
+
+.settings-menu-endpoint > input,
+.settings-menu-endpoint > button {
+  box-sizing: border-box;
+}
+
+.settings-menu-endpoint:focus-within {
+  box-shadow: 0 0 2px 2px #1EC7FF;
+}
+
+.settings-menu-endpoint > input:focus,
+ .settings-menu-endpoint > button:focus {
+  outline: none;
+  border: none;
+}

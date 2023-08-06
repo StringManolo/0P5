@@ -48,7 +48,7 @@ function Search(request, response) {
         let wikipediaSearchResults = [];
         if ((_b = request === null || request === void 0 ? void 0 : request.query) === null || _b === void 0 ? void 0 : _b.ehn) {
             try {
-                const ehnCache = yield (0, cache_1.getFromCache)(searchString, 'ehn', 5 * 60); // 5 minutes
+                const ehnCache = yield (0, cache_1.getFromCache)(searchString, 'ehn', 60 * 60 * 24 * 7); // 1 week
                 if (ehnCache) {
                     ehnSearchResults = ehnCache;
                     console.log(`ehn results extracted from cache`);
@@ -56,7 +56,7 @@ function Search(request, response) {
                 else {
                     ehnSearchResults = (_c = yield (0, foro_elhacker_net_1.default)(searchString)) !== null && _c !== void 0 ? _c : [];
                     if (ehnSearchResults.length > 0) {
-                        yield (0, cache_1.addToCache)(searchString, 'ehn', ehnSearchResults, 5 * 60);
+                        yield (0, cache_1.addToCache)(searchString, 'ehn', ehnSearchResults, 60 * 60 * 24 * 7);
                     }
                 }
             }
@@ -66,7 +66,7 @@ function Search(request, response) {
         }
         if ((_d = request === null || request === void 0 ? void 0 : request.query) === null || _d === void 0 ? void 0 : _d.wikipedia) {
             try {
-                const wikipediaCache = yield (0, cache_1.getFromCache)(searchString, 'wikipedia', 5 * 60); // 5 minutes
+                const wikipediaCache = yield (0, cache_1.getFromCache)(searchString, 'wikipedia', 60 * 60 * 24 * 7); // 1 week
                 if (wikipediaCache) {
                     wikipediaSearchResults = wikipediaCache;
                     console.log(`wikipedia results extracted from cache`);
@@ -74,7 +74,7 @@ function Search(request, response) {
                 else {
                     wikipediaSearchResults = (_e = yield (0, wikipedia_1.default)(searchString)) !== null && _e !== void 0 ? _e : [];
                     if (wikipediaSearchResults.length > 0) {
-                        yield (0, cache_1.addToCache)(searchString, 'wikipedia', wikipediaSearchResults, 5 * 60);
+                        yield (0, cache_1.addToCache)(searchString, 'wikipedia', wikipediaSearchResults, 60 * 60 * 24 * 7);
                     }
                 }
             }

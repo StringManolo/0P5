@@ -9,7 +9,7 @@ import { BackendResult } from './types/types';
 
 
 const App: React.FC = () => {
-  const ENDPOINT_URL = "http://localhost:8443";
+  const [endpoint, setEndpoint] = React.useState("http://localhost:8443");
   const [settings, setSettings] = React.useState<CheckboxState>({
     wikipedia: true,
     ehn: true,
@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
     try {
       // alert(`${ENDPOINT_URL}/search?q=${query}&${options}`);
-      const response = await axios.get<BackendResult[]>(`${ENDPOINT_URL}/search?q=${query}&${options}`);
+      const response = await axios.get<BackendResult[]>(`${endpoint}/search?q=${query}&${options}`);
       setSearchResults(response.data);
       // alert(`Respuesta:\n${JSON.stringify(response.data, null, 2)}`);
       // Pasar la data a nuevo componente / añadir router?
@@ -40,14 +40,18 @@ const App: React.FC = () => {
   }
 
   const handleSettingsChange = (newSettings: CheckboxState) => {
-    alert(`Settings changed: ${JSON.stringify(newSettings)}`);
+    // alert(`Settings changed: ${JSON.stringify(newSettings)}`);
     setSettings(newSettings);
   }
+
+  const handleEndpointChange = (newEndpoint: string) => {
+    setEndpoint(newEndpoint);
+  };
 
   return (
     <div>
       <Title />
-      <Settings onSettingsChange={handleSettingsChange} /> 
+      <Settings onSettingsChange={handleSettingsChange} endpoint={endpoint} onChangeEndpoint={handleEndpointChange} /> 
       <Search onSearch={handleSearch} />
       <SearchResults results={searchResults} />
     </div>

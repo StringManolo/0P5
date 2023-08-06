@@ -12,9 +12,11 @@ export interface CheckboxState {
 
 interface SettingsProps {
   onSettingsChange: (settings: CheckboxState) => void;
+  endpoint: string;
+  onChangeEndpoint: (newEndpoint: string) => void;
 }
 
-const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange }) => {
+const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onChangeEndpoint }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({
     wikipedia: true,
@@ -44,6 +46,11 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange }) => {
     onSettingsChange(updateCheckboxes);
   };
 
+  const handleEndpointInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newEndpoint = event.target.value;
+    onChangeEndpoint(newEndpoint);
+  };
+
   return (
     <>
       <div className="settings-icon" onClick={toggle}>⚙️</div>
@@ -51,6 +58,15 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange }) => {
         <div className="settings-menu-title-wrapper">
           <div className="settings-menu-title">Settings</div>
           {/* Thus wrapper allows me to set font-size inside a flex container. */}
+        </div>
+        <div className="settings-menu-endpoint">
+          <input
+            type="text"
+            placeholder="endpoint"
+            value={endpoint}
+            onChange={handleEndpointInputChange}
+          />
+          <button onClick={() => onChangeEndpoint(endpoint)}>Change Endpoint</button>
         </div>
         <div onClick={toggleCheckbox} data-checkbox="wikipedia">
           <span

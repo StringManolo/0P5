@@ -27,8 +27,6 @@ async function foro_elhacker_net(query: string) {
     const page = await browser.newPage();
     await page.goto('https://foro.elhacker.net/search.html');
 
-console.log(1);
-
     const searchInput = await page.$('[name="search"]');
     if (!searchInput) {
       console.log('Search input element not found.');
@@ -36,20 +34,16 @@ console.log(1);
       return;
     }
 
-console.log(2);
     await searchInput.type(query);
-console.log(2.1);
     await page.click('[name="submit"]');
-console.log(2.2);
-    await page.waitForNavigation();
-
-console.log(3);
+console.log(`Adding a timeout to wait for the results.`);
+    // await page.waitForNavigation();
+    await page.waitForTimeout(1500);
+console.log(`Navigating to results.`);
 
     let [textContent, htmlContent] = await page.evaluate(() => {
       return [document.body.innerText, document.body.innerHTML];
     });
-
-console.log(4);
 
     const urls = getUrlsAndInnerText(htmlContent);
 
@@ -88,10 +82,14 @@ console.log(4);
       };
 
       aux = titleAndDescription.split(obj.title)[2];
-      obj.description = ((aux.split('\n...').slice(1).join('\n...') || aux).trim() as string).replace(
-        (/\n\t.*$/gm),
-        '',
-      ).trim();
+      try {
+        obj.description = ((aux.split('\n...').slice(1).join('\n...') || aux).trim() as string).replace(
+          (/\n\t.*$/gm),
+          '',
+        ).trim();
+      } catch (error) {
+        obj.description = '';
+      }
 
       if (obj.description.length > 300) {
          obj.description = `${obj.description.substring(0, 300)}...`;
@@ -105,8 +103,6 @@ console.log(4);
       }
       results.push(obj);
     }
-
-console.log(5);
 
     await browser.close();
     return results;
