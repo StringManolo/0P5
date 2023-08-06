@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { getFromCache, addToCache } from '../cache/cache'; //sqlite3
 import foro_elhacker_net from '../../data_sources/foro_elhacker_net';
 import scrapeWikipedia from '../../data_sources/wikipedia'; 
 
@@ -42,7 +43,16 @@ export async function Search (request: Request, response: Response) {
 
   if (request?.query?.ehn) {
     try {
-      ehnSearchResults = await foro_elhacker_net(searchString) ?? [];
+      const ehnCache = await getFromCache(searchString, 'ehn', 60 * 60 * 24 * 7); // 1 week
+      if (ehnCache) {
+        ehnSearchResults = ehnCache;
+        console.log(`ehn results extracted from cache`);
+      } else {
+        ehnSearchResults = await foro_elhacker_net(searchString) ?? [];
+        if (ehnSearchResults.length > 0) {
+          await addToCache(searchString, 'ehn', ehnSearchResults, 60 * 60 * 24 * 7); 
+        }
+      }
     } catch (error) {
       ehnSearchResults = [];
     }
@@ -50,7 +60,16 @@ export async function Search (request: Request, response: Response) {
 
   if (request?.query?.wikipedia) {
     try {
-      wikipediaSearchResults = await scrapeWikipedia(searchString) ?? [];
+      const wikipediaCache = await getFromCache(searchString, 'wikipedia', 60 * 60 * 24 * 7); // 1 week
+      if (wikipediaCache) {
+        wikipediaSearchResults = wikipediaCache;
+        console.log(`wikipedia results extracted from cache`);
+      } else {
+        wikipediaSearchResults = await scrapeWikipedia(searchString) ?? [];
+        if (wikipediaSearchResults.length > 0) {
+          await addToCache(searchString, 'wikipedia', wikipediaSearchResults, 60 * 60 * 24 * 7); 
+        }
+      }
     } catch (error) {
       wikipediaSearchResults = [];
     }

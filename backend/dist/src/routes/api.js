@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Search = exports.APIDocumentation = void 0;
+const cache_1 = require("../cache/cache"); //sqlite3
 const foro_elhacker_net_1 = __importDefault(require("../../data_sources/foro_elhacker_net"));
 const wikipedia_1 = __importDefault(require("../../data_sources/wikipedia"));
 function APIDocumentation(request, response) {
@@ -47,7 +48,17 @@ function Search(request, response) {
         let wikipediaSearchResults = [];
         if ((_b = request === null || request === void 0 ? void 0 : request.query) === null || _b === void 0 ? void 0 : _b.ehn) {
             try {
-                ehnSearchResults = (_c = yield (0, foro_elhacker_net_1.default)(searchString)) !== null && _c !== void 0 ? _c : [];
+                const ehnCache = yield (0, cache_1.getFromCache)(searchString, 'ehn', 5 * 60); // 5 minutes
+                if (ehnCache) {
+                    ehnSearchResults = ehnCache;
+                    console.log(`ehn results extracted from cache`);
+                }
+                else {
+                    ehnSearchResults = (_c = yield (0, foro_elhacker_net_1.default)(searchString)) !== null && _c !== void 0 ? _c : [];
+                    if (ehnSearchResults.length > 0) {
+                        yield (0, cache_1.addToCache)(searchString, 'ehn', ehnSearchResults, 5 * 60);
+                    }
+                }
             }
             catch (error) {
                 ehnSearchResults = [];
@@ -55,7 +66,17 @@ function Search(request, response) {
         }
         if ((_d = request === null || request === void 0 ? void 0 : request.query) === null || _d === void 0 ? void 0 : _d.wikipedia) {
             try {
-                wikipediaSearchResults = (_e = yield (0, wikipedia_1.default)(searchString)) !== null && _e !== void 0 ? _e : [];
+                const wikipediaCache = yield (0, cache_1.getFromCache)(searchString, 'wikipedia', 5 * 60); // 5 minutes
+                if (wikipediaCache) {
+                    wikipediaSearchResults = wikipediaCache;
+                    console.log(`wikipedia results extracted from cache`);
+                }
+                else {
+                    wikipediaSearchResults = (_e = yield (0, wikipedia_1.default)(searchString)) !== null && _e !== void 0 ? _e : [];
+                    if (wikipediaSearchResults.length > 0) {
+                        yield (0, cache_1.addToCache)(searchString, 'wikipedia', wikipediaSearchResults, 5 * 60);
+                    }
+                }
             }
             catch (error) {
                 wikipediaSearchResults = [];
