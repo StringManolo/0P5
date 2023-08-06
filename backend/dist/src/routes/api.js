@@ -16,6 +16,7 @@ exports.Search = exports.APIDocumentation = void 0;
 const cache_1 = require("../cache/cache"); //sqlite3
 const foro_elhacker_net_1 = __importDefault(require("../../data_sources/foro_elhacker_net"));
 const wikipedia_1 = __importDefault(require("../../data_sources/wikipedia"));
+const ddg_1 = __importDefault(require("../../data_sources/ddg"));
 function APIDocumentation(request, response) {
     response.status(200).json({
         message: 'API Documentation',
@@ -32,7 +33,7 @@ function APIDocumentation(request, response) {
 }
 exports.APIDocumentation = APIDocumentation;
 function Search(request, response) {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f, _g;
     return __awaiter(this, void 0, void 0, function* () {
         // const searchPattern = request?.params?.q;            // uses /search/xss
         const searchPattern = (_a = request === null || request === void 0 ? void 0 : request.query) === null || _a === void 0 ? void 0 : _a.q; // uses /search?q=xss
@@ -46,6 +47,7 @@ function Search(request, response) {
         }
         let ehnSearchResults = [];
         let wikipediaSearchResults = [];
+        let ddgSearchResults = [];
         if ((_b = request === null || request === void 0 ? void 0 : request.query) === null || _b === void 0 ? void 0 : _b.ehn) {
             try {
                 const ehnCache = yield (0, cache_1.getFromCache)(searchString, 'ehn', 60 * 60 * 24 * 7); // 1 week
@@ -82,7 +84,26 @@ function Search(request, response) {
                 wikipediaSearchResults = [];
             }
         }
-        const results = ehnSearchResults.concat(wikipediaSearchResults);
+        if ((_f = request === null || request === void 0 ? void 0 : request.query) === null || _f === void 0 ? void 0 : _f.ddg) {
+            try {
+                const ddgCache = yield (0, cache_1.getFromCache)(searchString, 'ddg', 60 * 60 * 24 * 7); // 1 week
+                if (ddgCache) {
+                    ddgSearchResults = ddgCache;
+                    console.log(`ddg results extracted from cache`);
+                }
+                else {
+                    ddgSearchResults = (_g = yield (0, ddg_1.default)(searchString)) !== null && _g !== void 0 ? _g : [];
+                    if (ddgSearchResults.length > 0) {
+                        yield (0, cache_1.addToCache)(searchString, 'ddg', ddgSearchResults, 60 * 60 * 24 * 7);
+                    }
+                }
+            }
+            catch (error) {
+                ddgSearchResults = [];
+            }
+        }
+        const results = ehnSearchResults.concat(wikipediaSearchResults)
+            .concat(ddgSearchResults);
         response.status(200).json(results);
         return;
     });

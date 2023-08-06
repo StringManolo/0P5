@@ -12,20 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const wikipedia_1 = __importDefault(require("../data_sources/wikipedia"));
-const foro_elhacker_net_1 = __importDefault(require("../data_sources/foro_elhacker_net"));
+const ddg_1 = __importDefault(require("../data_sources/ddg"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    const searchTerm = 'ddos';
+    const searchTerm = 'xss';
+    /*
     try {
-        const wikipediaResult = yield (0, wikipedia_1.default)(searchTerm);
-        console.log(wikipediaResult);
+      const wikipediaResult = await scrapeWikipedia(searchTerm);
+      console.log(wikipediaResult);
+    } catch (error) {
+      console.error('Error occurred:', error);
     }
-    catch (error) {
-        console.error('Error occurred:', error);
-    }
+  
     try {
-        const foroElhackerNetResult = yield (0, foro_elhacker_net_1.default)(searchTerm);
-        console.log(foroElhackerNetResult);
+      const foroElhackerNetResult = await foro_elhacker_net(searchTerm);
+      console.log(foroElhackerNetResult);
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
+    */
+    try {
+        const ddgResult = yield (0, ddg_1.default)(searchTerm);
+        console.log(ddgResult);
     }
     catch (error) {
         console.error('Error occurred:', error);

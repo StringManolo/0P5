@@ -13,9 +13,14 @@ const App: React.FC = () => {
   const [settings, setSettings] = React.useState<CheckboxState>({
     wikipedia: true,
     ehn: true,
-    checkbox3: false,
+    ddg: false,
     checkbox4: false,
-    checkbox5: false
+    checkbox5: false,
+    checkbox6: false,
+    checkbox7: false,
+    checkbox8: false,
+    checkbox9: false,
+    checkbox10: false
   });
   const [searchResults, setSearchResults] = React.useState<BackendResult[]>([]);
 

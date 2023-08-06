@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getFromCache, addToCache } from '../cache/cache'; //sqlite3
 import foro_elhacker_net from '../../data_sources/foro_elhacker_net';
 import scrapeWikipedia from '../../data_sources/wikipedia'; 
+import scrapeDDG from '../../data_sources/ddg';
 
 interface SearchResult {
   author: string;
@@ -39,7 +40,7 @@ export async function Search (request: Request, response: Response) {
 
   let ehnSearchResults: SearchResult[] = [];
   let wikipediaSearchResults: SearchResult[] = [];
-
+  let ddgSearchResults: SearchResult[] = [];
 
   if (request?.query?.ehn) {
     try {
@@ -75,7 +76,26 @@ export async function Search (request: Request, response: Response) {
     }
   }
 
-  const results: SearchResult[] = ehnSearchResults.concat(wikipediaSearchResults);
+  if (request?.query?.ddg) {
+    try {
+      const ddgCache = await getFromCache(searchString, 'ddg', 60 * 60 * 24 * 7); // 1 week
+      if (ddgCache) {
+        ddgSearchResults = ddgCache;
+        console.log(`ddg results extracted from cache`);
+      } else {
+        ddgSearchResults = await scrapeDDG(searchString) ?? [];
+        if (ddgSearchResults.length > 0) {
+          await addToCache(searchString, 'ddg', ddgSearchResults, 60 * 60 * 24 * 7); 
+        }
+      }
+    } catch (error) {
+      ddgSearchResults = [];
+    }
+  }
+
+  const results: SearchResult[] = ehnSearchResults.concat(wikipediaSearchResults)
+  .concat(ddgSearchResults);
+
   response.status(200).json(results);
   return;
 }

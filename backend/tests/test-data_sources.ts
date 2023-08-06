@@ -1,8 +1,11 @@
 import scrapeWikipedia from '../data_sources/wikipedia';
 import foro_elhacker_net from '../data_sources/foro_elhacker_net';
+import scrapeDDG from '../data_sources/ddg';
 
 (async () => {
-  const searchTerm = 'ddos';
+  const searchTerm = 'xss';
+
+  /*
   try {
     const wikipediaResult = await scrapeWikipedia(searchTerm);
     console.log(wikipediaResult);
@@ -16,5 +19,14 @@ import foro_elhacker_net from '../data_sources/foro_elhacker_net';
   } catch (error) {
     console.error('Error occurred:', error);
   }
+  */
+
+  try {
+    const ddgResult = await scrapeDDG(searchTerm);
+    console.log(ddgResult);
+  } catch (error) {
+    console.error('Error occurred:', error);
+  }
+
 })();
 

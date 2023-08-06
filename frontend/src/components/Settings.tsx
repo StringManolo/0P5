@@ -5,9 +5,14 @@ import './Settings.css';
 export interface CheckboxState {
   wikipedia: boolean;
   ehn: boolean;
-  checkbox3: boolean;
+  ddg: boolean;
   checkbox4: boolean;
   checkbox5: boolean;
+  checkbox6: boolean;
+  checkbox7: boolean;
+  checkbox8: boolean;
+  checkbox9: boolean;
+  checkbox10: boolean;
 }
 
 interface SettingsProps {
@@ -21,9 +26,14 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({
     wikipedia: true,
     ehn: true,
-    checkbox3: false,
+    ddg: false,
     checkbox4: false,
     checkbox5: false,
+    checkbox6: false,
+    checkbox7: false,
+    checkbox8: false,
+    checkbox9: false,
+    checkbox10: false
   });
 
   const toggle = () => {
@@ -84,13 +94,13 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
           >foro.elhacker.net</span>
           <input type="checkbox" checked={checkboxes.ehn} />
         </div>
-        <div onClick={toggleCheckbox} data-checkbox="checkbox3">
+        <div onClick={toggleCheckbox} data-checkbox="ddg">
           <span
             // data-tooltip-id="longnames-tooltip"
             // data-tooltip-content="Opcion 3"
             // data-tooltip-place="bottom" 
-          >Opcion 3</span>
-          <input type="checkbox" checked={checkboxes.checkbox3} />
+          >duckduckgo.com</span>
+          <input type="checkbox" checked={checkboxes.ddg} />
         </div>
         <div onClick={toggleCheckbox} data-checkbox="checkbox4">
           <span
@@ -109,6 +119,46 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
             // data-tooltip-place="bottom" 
           >C</span>
           <input type="checkbox" checked={checkboxes.checkbox5} />
+        </div>
+        <div onClick={toggleCheckbox} data-checkbox="checkbox6">
+          <span
+            // data-tooltip-id="longnames-tooltip"
+            // data-tooltip-content="D"
+            // data-tooltip-place="bottom" 
+          >D</span>
+          <input type="checkbox" checked={checkboxes.checkbox6} />
+        </div>
+        <div onClick={toggleCheckbox} data-checkbox="checkbox7">
+          <span
+            // data-tooltip-id="longnames-tooltip"
+            // data-tooltip-content="E"
+            // data-tooltip-place="bottom" 
+          >E</span>
+          <input type="checkbox" checked={checkboxes.checkbox7} />
+        </div>
+        <div onClick={toggleCheckbox} data-checkbox="checkbox8">
+          <span
+            // data-tooltip-id="longnames-tooltip"
+            // data-tooltip-content="F"
+            // data-tooltip-place="bottom"
+          >F</span>
+          <input type="checkbox" checked={checkboxes.checkbox8} />
+        </div>
+        <div onClick={toggleCheckbox} data-checkbox="checkbox9">
+          <span
+            // data-tooltip-id="longnames-tooltip"
+            // data-tooltip-content="G"
+            // data-tooltip-place="bottom" 
+          >G</span>
+          <input type="checkbox" checked={checkboxes.checkbox9} />
+        </div>
+        <div onClick={toggleCheckbox} data-checkbox="checkbox10">
+          <span
+            // data-tooltip-id="longnames-tooltip"
+            // data-tooltip-content="H"
+            // data-tooltip-place="bottom" 
+          >H</span>
+          <input type="checkbox" checked={checkboxes.checkbox10} />
         </div>
       </nav>
       <Tooltip id="longnames-tooltip" />
