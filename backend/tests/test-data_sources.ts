@@ -1,6 +1,7 @@
 import scrapeWikipedia from '../data_sources/wikipedia';
 import foro_elhacker_net from '../data_sources/foro_elhacker_net';
 import scrapeDDG from '../data_sources/ddg';
+import scrapeGist from '../data_sources/gist';
 
 (async () => {
   const searchTerm = 'xss';
@@ -19,11 +20,18 @@ import scrapeDDG from '../data_sources/ddg';
   } catch (error) {
     console.error('Error occurred:', error);
   }
-  */
 
   try {
     const ddgResult = await scrapeDDG(searchTerm);
     console.log(ddgResult);
+  } catch (error) {
+    console.error('Error occurred:', error);
+  }
+  */
+
+  try {
+    const gistResult = await scrapeGist(searchTerm);
+    console.log(gistResult);
   } catch (error) {
     console.error('Error occurred:', error);
   }

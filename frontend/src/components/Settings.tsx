@@ -6,7 +6,7 @@ export interface CheckboxState {
   wikipedia: boolean;
   ehn: boolean;
   ddg: boolean;
-  checkbox4: boolean;
+  gist: boolean;
   checkbox5: boolean;
   checkbox6: boolean;
   checkbox7: boolean;
@@ -26,8 +26,8 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({
     wikipedia: true,
     ehn: true,
-    ddg: false,
-    checkbox4: false,
+    ddg: true,
+    gist: true,
     checkbox5: false,
     checkbox6: false,
     checkbox7: false,
@@ -94,6 +94,8 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
           >foro.elhacker.net</span>
           <input type="checkbox" checked={checkboxes.ehn} />
         </div>
+
+
         <div onClick={toggleCheckbox} data-checkbox="ddg">
           <span
             // data-tooltip-id="longnames-tooltip"
@@ -102,16 +104,18 @@ const SettingsMenu: React.FC<SettingsProps> = ({ onSettingsChange, endpoint, onC
           >duckduckgo.com</span>
           <input type="checkbox" checked={checkboxes.ddg} />
         </div>
-        <div onClick={toggleCheckbox} data-checkbox="checkbox4">
+
+
+        <div onClick={toggleCheckbox} data-checkbox="gist">
           <span
             data-tooltip-id="longnames-tooltip"
-            data-tooltip-content="OpcionConUnNombreDemasiadoLargo"
+            data-tooltip-content="gist"
             data-tooltip-place="bottom"
-          >
-            OpcionConUnNombreDemasiadoLargo
-          </span>
-          <input type="checkbox" checked={checkboxes.checkbox4} />
+          >gist</span>
+          <input type="checkbox" checked={checkboxes.gist} />
         </div>
+
+
         <div onClick={toggleCheckbox} data-checkbox="checkbox5">
           <span
             // data-tooltip-id="longnames-tooltip"

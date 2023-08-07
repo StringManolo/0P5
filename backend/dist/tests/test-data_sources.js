@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ddg_1 = __importDefault(require("../data_sources/ddg"));
+const gist_1 = __importDefault(require("../data_sources/gist"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const searchTerm = 'xss';
     /*
@@ -29,10 +29,17 @@ const ddg_1 = __importDefault(require("../data_sources/ddg"));
     } catch (error) {
       console.error('Error occurred:', error);
     }
+  
+    try {
+      const ddgResult = await scrapeDDG(searchTerm);
+      console.log(ddgResult);
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
     */
     try {
-        const ddgResult = yield (0, ddg_1.default)(searchTerm);
-        console.log(ddgResult);
+        const gistResult = yield (0, gist_1.default)(searchTerm);
+        console.log(gistResult);
     }
     catch (error) {
         console.error('Error occurred:', error);

@@ -13,8 +13,8 @@ const App: React.FC = () => {
   const [settings, setSettings] = React.useState<CheckboxState>({
     wikipedia: true,
     ehn: true,
-    ddg: false,
-    checkbox4: false,
+    ddg: true,
+    gist: true,
     checkbox5: false,
     checkbox6: false,
     checkbox7: false,
