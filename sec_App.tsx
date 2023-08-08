@@ -7,6 +7,7 @@ import Title from './components/Title';
 import SearchResults from './components/SearchResults';
 import { BackendResult } from './types/types';
 
+
 const App: React.FC = () => {
   const [endpoint, setEndpoint] = React.useState("http://localhost:8443");
   const [settings, setSettings] = React.useState<CheckboxState>({

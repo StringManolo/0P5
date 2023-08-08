@@ -8,11 +8,11 @@ function has_sudo() {
   fi
 }
 
-if has_sudo; then
-  sudo apt install -y tesseract-ocr;
-  sudo apt install -y tesseract-ocr-spa;
-else
-  # Termux proot-distro
-  apt install -y tesseract-ocr;
-  apt install -y tesseract-ocr-spa;
-fi
+# if has_sudo; then
+#  sudo apt install -y tesseract-ocr;
+#  sudo apt install -y tesseract-ocr-spa;
+#else
+#  # Termux proot-distro
+#  apt install -y tesseract-ocr;
+#  apt install -y tesseract-ocr-spa;
+#fi
